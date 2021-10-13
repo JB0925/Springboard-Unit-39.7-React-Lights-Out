@@ -33,14 +33,24 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+    for (let i = 0; i < nrows; i++) {
+      let row = [];
+      for (let j = 0; j < ncols; j++) {
+        let randomNum = Math.random();
+        randomNum > chanceLightStartsOn ? row.push(true) : row.push(false);
+      };
+      initialBoard.push(row);
+    };
     return initialBoard;
-  }
-
+  };
+  
+  // check to see if the game has been won by checking to see
+  // if every cell has the value of false
   function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
-  }
-
+    return board.every(row => row.every(cell => cell === false));
+  };
+  
+  // updating state in a way that causes a rerender of the component
   function flipCellsAround(coord) {
     setBoard(oldBoard => {
       const [y, x] = coord.split("-").map(Number);
@@ -52,22 +62,38 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
           boardCopy[y][x] = !boardCopy[y][x];
         }
       };
-
-      // TODO: Make a (deep) copy of the oldBoard
-
-      // TODO: in the copy, flip this cell and the cells around it
-
-      // TODO: return the copy
+      
+      let updatedBoard = [...oldBoard];
+      flipCell(y, x, updatedBoard);
+      flipCell(y-1, x, updatedBoard);
+      flipCell(y+1, x, updatedBoard);
+      flipCell(y, x-1, updatedBoard);
+      flipCell(y, x+1, updatedBoard);
+      return updatedBoard;
     });
   }
+  
+  const cells = board.map((row,i) => 
+                          row.map((cell,j) => 
+                                  <Cell 
+                                  flipCellsAroundMe={flipCellsAround}
+                                  isLit={cell}
+                                  coords={`${j}-${i}`} />));
 
-  // if the game is won, just show a winning msg & render nothing else
+  return (
+    hasWon() ? 
+    <h1 style={{color: "#f7cf6c", fontSize: "5rem"}}>Congrats, you WON!</h1>
+    :
+    <div className="Board">
+      {cells}
+    </div> 
+  );
+};
 
-  // TODO
-
-  // make table board
-
-  // TODO
-}
+Board.defaultProps = {
+  nrows: 3,
+  ncols: 3,
+  chanceLightStartsOn: 0.5
+};
 
 export default Board;

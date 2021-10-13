@@ -1,10 +1,15 @@
 .Cell {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
   background-color: darkgray;
   cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 1px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  /* box-shadow: inset 0px 0px 20px 10px rgba(0, 0, 0, 0.6); */
 }
 
 .Cell-lit {
-  background-color: white;
+  background-color: #f7cf6c;
 }
