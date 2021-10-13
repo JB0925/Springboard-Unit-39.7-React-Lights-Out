@@ -84,9 +84,18 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     hasWon() ? 
     <h1 style={{color: "#f7cf6c", fontSize: "5rem"}}>Congrats, you WON!</h1>
     :
-    <div className="Board">
-      {cells}
-    </div> 
+    <div className="Board-main">
+      <div className="Board-directions">
+        <h3>How to Play:</h3>
+        <p>Click a box. It will turn off or on the other boxes around it.
+          Keep clicking until you turn off all of the boxes! The boxes are
+          off when they are all turned gray!
+        </p>
+      </div>
+      <div className="Board">
+        {cells}
+      </div> 
+    </div>
   );
 };
 
