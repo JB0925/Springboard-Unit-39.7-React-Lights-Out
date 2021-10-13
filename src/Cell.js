@@ -24,7 +24,7 @@ function Cell({ flipCellsAroundMe, isLit, coords}) {
   };
 
   const classes = `Cell ${isLit ? "Cell-lit" : ""}`;
-  return <td className={classes} onClick={handleClick} />;
+  return <div className={classes} onClick={handleClick}></div>;
 };
 
 export default Cell;
