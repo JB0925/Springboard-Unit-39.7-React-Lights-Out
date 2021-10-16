@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cell from "./Cell";
 import "./Board.css";
+import { v4 as uuid } from "uuid";
 
 /** Game board of Lights out.
  *
@@ -78,7 +79,8 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
                                   <Cell 
                                   flipCellsAroundMe={flipCellsAround}
                                   isLit={cell}
-                                  coords={`${j}-${i}`} />));
+                                  coords={`${j}-${i}`}
+                                  key={uuid()} />));
 
   return (
     hasWon() ? 
